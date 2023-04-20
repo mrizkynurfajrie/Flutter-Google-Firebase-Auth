@@ -10,26 +10,6 @@ String usersToJson(Users data) => json.encode(data.toJson());
 
 class Users {
     Users({
-        this.status,
-        this.data,
-    });
-
-    UsersStatus? status;
-    Data? data;
-
-    factory Users.fromJson(Map<String, dynamic> json) => Users(
-        status: json["status"] == null ? null : UsersStatus.fromJson(json["status"]),
-        data: json["data"] == null ? null : Data.fromJson(json["data"]),
-    );
-
-    Map<String, dynamic> toJson() => {
-        "status": status?.toJson(),
-        "data": data?.toJson(),
-    };
-}
-
-class Data {
-    Data({
         this.email,
         this.hp,
         this.firstname,
@@ -54,12 +34,12 @@ class Data {
     DateTime? tglLahir;
     int? jenisKelamin;
     int? id;
-    AccountStatusClass? status;
-    AccountStatusClass? accountStatus;
+    Status? status;
+    Status? accountStatus;
     Photo? photo;
     Toko? toko;
 
-    factory Data.fromJson(Map<String, dynamic> json) => Data(
+    factory Users.fromJson(Map<String, dynamic> json) => Users(
         email: json["email"],
         hp: json["hp"],
         firstname: json["firstname"],
@@ -69,8 +49,8 @@ class Data {
         tglLahir: json["tgl_lahir"] == null ? null : DateTime.parse(json["tgl_lahir"]),
         jenisKelamin: json["jenis_kelamin"],
         id: json["id"],
-        status: json["status"] == null ? null : AccountStatusClass.fromJson(json["status"]),
-        accountStatus: json["account_status"] == null ? null : AccountStatusClass.fromJson(json["account_status"]),
+        status: json["status"] == null ? null : Status.fromJson(json["status"]),
+        accountStatus: json["account_status"] == null ? null : Status.fromJson(json["account_status"]),
         photo: json["photo"] == null ? null : Photo.fromJson(json["photo"]),
         toko: json["toko"] == null ? null : Toko.fromJson(json["toko"]),
     );
@@ -92,8 +72,8 @@ class Data {
     };
 }
 
-class AccountStatusClass {
-    AccountStatusClass({
+class Status {
+    Status({
         this.kode,
         this.keterangan,
     });
@@ -101,7 +81,7 @@ class AccountStatusClass {
     int? kode;
     String? keterangan;
 
-    factory AccountStatusClass.fromJson(Map<String, dynamic> json) => AccountStatusClass(
+    factory Status.fromJson(Map<String, dynamic> json) => Status(
         kode: json["kode"],
         keterangan: json["keterangan"],
     );
@@ -192,7 +172,7 @@ class Toko {
     String? aturanBelanja;
     String? aturanRetur;
     int? id;
-    AccountStatusClass? status;
+    Status? status;
     List<Photo>? logo;
 
     factory Toko.fromJson(Map<String, dynamic> json) => Toko(
@@ -213,7 +193,7 @@ class Toko {
         aturanBelanja: json["aturan_belanja"],
         aturanRetur: json["aturan_retur"],
         id: json["id"],
-        status: json["status"] == null ? null : AccountStatusClass.fromJson(json["status"]),
+        status: json["status"] == null ? null : Status.fromJson(json["status"]),
         logo: json["logo"] == null ? [] : List<Photo>.from(json["logo"]!.map((x) => Photo.fromJson(x))),
     );
 
@@ -237,25 +217,5 @@ class Toko {
         "id": id,
         "status": status?.toJson(),
         "logo": logo == null ? [] : List<dynamic>.from(logo!.map((x) => x.toJson())),
-    };
-}
-
-class UsersStatus {
-    UsersStatus({
-        this.kode,
-        this.keterangan,
-    });
-
-    String? kode;
-    String? keterangan;
-
-    factory UsersStatus.fromJson(Map<String, dynamic> json) => UsersStatus(
-        kode: json["kode"],
-        keterangan: json["keterangan"],
-    );
-
-    Map<String, dynamic> toJson() => {
-        "kode": kode,
-        "keterangan": keterangan,
     };
 }

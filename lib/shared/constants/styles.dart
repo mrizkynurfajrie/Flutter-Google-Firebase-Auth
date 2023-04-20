@@ -183,3 +183,22 @@ InputDecoration inputDecoration({
         ),
   );
 }
+
+class IconSizes {
+  static double get genderIcon => 10.w;
+  static double get xs => 12.w;
+  static double get sm => 16.w;
+  static double get add => 18.w;
+  static double get med => 24.w;
+  static double get medx => 28.w;
+  static double get adm => 31.w;
+  static double get lg => 32.w;
+  static double get listuser => 38.w;
+  static double get menu => 40.w;
+  static double get xl => 48.w;
+  static double get xxl => 60.w;
+  static double get profPictSet => 64.w;
+  static double get profPict => 40.w;
+  static double get xxxl => 90.w;
+  static double get popup => 173.w;
+}
