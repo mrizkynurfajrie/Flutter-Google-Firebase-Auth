@@ -1,7 +1,9 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:koffiesoft_test/features/register/controller_register.dart';
+import 'package:koffiesoft_test/routes/app_routes.dart';
 import 'package:koffiesoft_test/shared/constants/colors.dart';
 import 'package:koffiesoft_test/shared/constants/styles.dart';
 import 'package:koffiesoft_test/shared/widgets/button_primary.dart';
@@ -43,7 +45,6 @@ class PageRegister extends GetView<ControllerRegister> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  verticalSpace(14.h),
                   Text(
                     'Sign Up',
                     style: TextStyle(
@@ -143,7 +144,7 @@ class PageRegister extends GetView<ControllerRegister> {
                     label: 'Password',
                     hintText: 'Masukkan Password',
                   ),
-                  verticalSpace(48.h),
+                  verticalSpace(24.h),
                   controller.loading.isFalse
                       ? ButtonPrimary(
                           onPressed: () => controller.signup(),
@@ -151,7 +152,32 @@ class PageRegister extends GetView<ControllerRegister> {
                         )
                       : const CircularProgressIndicator(
                           color: AppColor.primaryColor,
+                        ),
+                  verticalSpace(12.h),
+                  RichText(
+                    text: TextSpan(
+                      text: 'Already have an account? ',
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: AppColor.neutral.shade700,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: 'Login',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: AppColor.neutral.shade900,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () => Get.toNamed(
+                                  Routes.loginPage,
+                                ),
                         )
+                      ],
+                    ),
+                  )
                 ],
               ),
             ),

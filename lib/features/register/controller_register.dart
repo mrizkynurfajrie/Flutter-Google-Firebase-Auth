@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:koffiesoft_test/features/register/api_register.dart';
 import 'package:koffiesoft_test/response/users.dart';
+import 'package:koffiesoft_test/routes/app_routes.dart';
 import 'package:koffiesoft_test/shared/widgets/show_dialog.dart';
 
 class ControllerRegister extends GetxController {
@@ -28,6 +29,18 @@ class ControllerRegister extends GetxController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
+  }
+
+  @override
+  void onDispose() {
+    textEmail.dispose();
+    textHp.dispose();
+    textFirstname.dispose();
+    textLastname.dispose();
+    textTglLahir.dispose();
+    textJeniskelamin.dispose();
+    textPassword.dispose();
+    super.onClose();
   }
 
   signup() async {
@@ -56,6 +69,10 @@ class ControllerRegister extends GetxController {
         );
         await Future.delayed(const Duration(seconds: 3));
         Get.back();
+        Get.toNamed(
+          Routes.loginPage,
+          arguments: textEmail.text,
+        );
       } else {
         showPopUp(
           dismissible: false,
