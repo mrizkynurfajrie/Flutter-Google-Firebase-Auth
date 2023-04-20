@@ -91,7 +91,7 @@ class _AppViewState extends State<AppView> with WidgetsBindingObserver {
             ),
           );
         },
-        // getPages: AppPages.pages,
+        getPages: AppPages.pages,
         initialRoute: Routes.registerPage,
         initialBinding: ControllerBind(),
         locale: const Locale('id', 'ID'),
