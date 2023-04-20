@@ -43,4 +43,24 @@ class Api {
 
     return data;
   }
+
+  Future<dynamic> apiJsonPostLogin(
+    String url,
+    Map<String, String> params,
+  ) async {
+    Map<String, String> headers = {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    };
+    log('headers : $headers');
+    log('api url : $baseUrl$url');
+
+    var r = await http.post(Uri.parse(baseUrl + url),
+        headers: headers,
+        body: params,
+        encoding: Encoding.getByName("utf-8"));
+    var data = jsonDecode(r.body);
+    log('status code : ${r.statusCode}');
+
+    return data;
+  }
 }

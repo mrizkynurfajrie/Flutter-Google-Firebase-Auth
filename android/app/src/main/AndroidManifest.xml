@@ -2,6 +2,7 @@
     package="com.example.koffiesoft_test">
    <application
         android:label="koffiesoft_test"
+        android:usesCleartextTraffic="true"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

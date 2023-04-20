@@ -42,145 +42,151 @@ class PageRegister extends GetView<ControllerRegister> {
         child: SingleChildScrollView(
           child: Obx(
             () => Center(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    'Sign Up',
-                    style: TextStyle(
-                      fontSize: 28,
-                      color: AppColor.neutral.shade800,
-                      fontWeight: FontWeight.w600,
-                    ),
-                    textAlign: TextAlign.center,
+                child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  'Sign Up',
+                  style: TextStyle(
+                    fontSize: 28,
+                    color: AppColor.neutral.shade800,
+                    fontWeight: FontWeight.w600,
                   ),
-                  verticalSpace(6.h),
-                  Text(
-                    'Create an Account',
+                  textAlign: TextAlign.center,
+                ),
+                verticalSpace(6.h),
+                Text(
+                  'Create an Account',
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: AppColor.neutral.shade800,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                verticalSpace(24.h),
+                InputEmail(
+                  controller: controller.textEmail,
+                  isValid: (value) {},
+                  email: (value) {},
+                  label: 'E-mail',
+                  hintText: 'Masukkan E-Mail',
+                  margin: EdgeInsets.only(top: 4.h),
+                  contentPadding: EdgeInsets.symmetric(
+                    vertical: 12.h,
+                    horizontal: 12.w,
+                  ),
+                ),
+                verticalSpace(6.h),
+                InputPrimary(
+                  controller: controller.textHp,
+                  label: 'Nomor HP',
+                  hintText: 'Masukkan Nomor HP',
+                  margin: EdgeInsets.only(top: 4.h),
+                  contentPadding: EdgeInsets.symmetric(
+                    vertical: 12.h,
+                    horizontal: 12.w,
+                  ),
+                  onTap: () {},
+                ),
+                verticalSpace(6.h),
+                InputPrimary(
+                  controller: controller.textFirstname,
+                  label: 'Nama Depan',
+                  hintText: 'Masukkan Nama Depan',
+                  margin: EdgeInsets.only(top: 4.h),
+                  contentPadding: EdgeInsets.symmetric(
+                    vertical: 12.h,
+                    horizontal: 12.w,
+                  ),
+                  onTap: () {},
+                ),
+                verticalSpace(6.h),
+                InputPrimary(
+                  controller: controller.textLastname,
+                  label: 'Nama Belakang',
+                  hintText: 'Masukkan Nama Belakang',
+                  margin: EdgeInsets.only(top: 4.h),
+                  contentPadding: EdgeInsets.symmetric(
+                    vertical: 12.h,
+                    horizontal: 12.w,
+                  ),
+                  onTap: () {},
+                ),
+                verticalSpace(6.h),
+                InputDate(
+                  controller: controller.textTglLahir,
+                  label: 'Tanggal Lahir',
+                  selectedDate: (value) {},
+                  isValid: (value) {},
+                  boxWidth: Get.width,
+                  margin: EdgeInsets.only(top: 4.h),
+                  contentPadding: EdgeInsets.symmetric(
+                    vertical: 12.h,
+                    horizontal: 12.w,
+                  ),
+                ),
+                verticalSpace(6.h),
+                InputGender(
+                  controller: controller.textJeniskelamin,
+                  label: 'Jenis Kelamin',
+                  hintText: 'Pilih Jenis Kelamin',
+                  margin: EdgeInsets.only(top: 4.h),
+                  contentPadding: EdgeInsets.symmetric(
+                    vertical: 12.h,
+                    horizontal: 12.w,
+                  ),
+                  onTap: () => controller.genderSelect(context),
+                ),
+                verticalSpace(6.h),
+                InputPassword(
+                  onChange: (value) {},
+                  controller: controller.textPassword,
+                  label: 'Password',
+                  hintText: 'Masukkan Password',
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 12.h),
+                  child: Divider(
+                    color: AppColor.neutral.shade300,
+                    thickness: 1,
+                  ),
+                ),
+                controller.loading.isFalse
+                    ? ButtonPrimary(
+                        onPressed: () => controller.signup(),
+                        label: 'Sign Up',
+                        enable: controller.isValidFormData.value,
+                      )
+                    : const CircularProgressIndicator(
+                        color: AppColor.primaryColor,
+                      ),
+                verticalSpace(12.h),
+                RichText(
+                  text: TextSpan(
+                    text: 'Already have an account? ',
                     style: TextStyle(
-                      fontSize: 14,
-                      color: AppColor.neutral.shade800,
+                      fontSize: 12,
+                      color: AppColor.neutral.shade700,
                       fontWeight: FontWeight.w500,
                     ),
-                  ),
-                  verticalSpace(24.h),
-                  InputEmail(
-                    controller: controller.textEmail,
-                    isValid: (value) {},
-                    email: (value) {},
-                    label: 'E-mail',
-                    hintText: 'Masukkan E-Mail',
-                    margin: EdgeInsets.only(top: 4.h),
-                    contentPadding: EdgeInsets.symmetric(
-                      vertical: 12.h,
-                      horizontal: 12.w,
-                    ),
-                  ),
-                  verticalSpace(6.h),
-                  InputPrimary(
-                    controller: controller.textHp,
-                    label: 'Nomor HP',
-                    hintText: 'Masukkan Nomor HP',
-                    margin: EdgeInsets.only(top: 4.h),
-                    contentPadding: EdgeInsets.symmetric(
-                      vertical: 12.h,
-                      horizontal: 12.w,
-                    ),
-                    onTap: () {},
-                  ),
-                  verticalSpace(6.h),
-                  InputPrimary(
-                    controller: controller.textFirstname,
-                    label: 'Nama Depan',
-                    hintText: 'Masukkan Nama Depan',
-                    margin: EdgeInsets.only(top: 4.h),
-                    contentPadding: EdgeInsets.symmetric(
-                      vertical: 12.h,
-                      horizontal: 12.w,
-                    ),
-                    onTap: () {},
-                  ),
-                  verticalSpace(6.h),
-                  InputPrimary(
-                    controller: controller.textLastname,
-                    label: 'Nama Belakang',
-                    hintText: 'Masukkan Nama Belakang',
-                    margin: EdgeInsets.only(top: 4.h),
-                    contentPadding: EdgeInsets.symmetric(
-                      vertical: 12.h,
-                      horizontal: 12.w,
-                    ),
-                    onTap: () {},
-                  ),
-                  verticalSpace(6.h),
-                  InputDate(
-                    controller: controller.textTglLahir,
-                    label: 'Tanggal Lahir',
-                    selectedDate: (value) {},
-                    isValid: (value) {},
-                    boxWidth: Get.width,
-                    margin: EdgeInsets.only(top: 4.h),
-                    contentPadding: EdgeInsets.symmetric(
-                      vertical: 12.h,
-                      horizontal: 12.w,
-                    ),
-                  ),
-                  verticalSpace(6.h),
-                  InputGender(
-                    controller: controller.textJeniskelamin,
-                    label: 'Jenis Kelamin',
-                    hintText: 'Pilih Jenis Kelamin',
-                    margin: EdgeInsets.only(top: 4.h),
-                    contentPadding: EdgeInsets.symmetric(
-                      vertical: 12.h,
-                      horizontal: 12.w,
-                    ),
-                    onTap: () => controller.genderSelect(context),
-                  ),
-                  verticalSpace(6.h),
-                  InputPassword(
-                    onChange: (value) {},
-                    controller: controller.textPassword,
-                    label: 'Password',
-                    hintText: 'Masukkan Password',
-                  ),
-                  verticalSpace(24.h),
-                  controller.loading.isFalse
-                      ? ButtonPrimary(
-                          onPressed: () => controller.signup(),
-                          label: 'Sign Up',
-                        )
-                      : const CircularProgressIndicator(
-                          color: AppColor.primaryColor,
+                    children: <TextSpan>[
+                      TextSpan(
+                        text: 'Login',
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: AppColor.neutral.shade900,
+                          fontWeight: FontWeight.bold,
                         ),
-                  verticalSpace(12.h),
-                  RichText(
-                    text: TextSpan(
-                      text: 'Already have an account? ',
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: AppColor.neutral.shade700,
-                        fontWeight: FontWeight.w500,
-                      ),
-                      children: <TextSpan>[
-                        TextSpan(
-                          text: 'Login',
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: AppColor.neutral.shade900,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () => Get.toNamed(
-                                  Routes.loginPage,
-                                ),
-                        )
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            ),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () => Get.toNamed(
+                                Routes.loginPage,
+                              ),
+                      )
+                    ],
+                  ),
+                )
+              ],
+            )),
           ),
         ),
       ),

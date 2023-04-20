@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:koffiesoft_test/features/register/api_register.dart';
 import 'package:koffiesoft_test/response/users.dart';
 import 'package:koffiesoft_test/routes/app_routes.dart';
+import 'package:koffiesoft_test/shared/helpers/regex.dart';
 import 'package:koffiesoft_test/shared/widgets/show_dialog.dart';
 
 class ControllerRegister extends GetxController {
@@ -25,9 +26,19 @@ class ControllerRegister extends GetxController {
   var jenisKelamin = 1.obs;
   var loading = false.obs;
 
+  var validEmail = false.obs;
+  var validHp = false.obs;
+  var validFirstName = false.obs;
+  var validLastName = false.obs;
+  var validTglLahir = false.obs;
+  var validJenisKelamin = false.obs;
+  var validPassword = false.obs;
+  var isValidFormData = false.obs;
+
   @override
   void onInit() {
     // TODO: implement onInit
+    formValidationListener();
     super.onInit();
   }
 
@@ -41,6 +52,47 @@ class ControllerRegister extends GetxController {
     textJeniskelamin.dispose();
     textPassword.dispose();
     super.onClose();
+  }
+
+  formValidationListener() {
+    textEmail.addListener(() {
+      validEmail.value = isValidNotEmpty(data: textEmail.text);
+      validateFormData();
+    });
+    textHp.addListener(() {
+      validHp.value = isValidNotEmpty(data: textHp.text);
+      validateFormData();
+    });
+    textFirstname.addListener(() {
+      validFirstName.value = isValidNotEmpty(data: textFirstname.text);
+      validateFormData();
+    });
+    textLastname.addListener(() {
+      validLastName.value = isValidNotEmpty(data: textLastname.text);
+      validateFormData();
+    });
+    textTglLahir.addListener(() {
+      validTglLahir.value = isValidNotEmpty(data: textTglLahir.text);
+      validateFormData();
+    });
+    textJeniskelamin.addListener(() {
+      validJenisKelamin.value = isValidNotEmpty(data: textJeniskelamin.text);
+      validateFormData();
+    });
+    textPassword.addListener(() {
+      validPassword.value = isValidNotEmpty(data: textPassword.text);
+      validateFormData();
+    });
+  }
+
+  validateFormData() {
+    isValidFormData.value = validEmail.value &&
+        validHp.value &&
+        validFirstName.value &&
+        validLastName.value &&
+        validTglLahir.value &&
+        validJenisKelamin.value &&
+        validPassword.value;
   }
 
   signup() async {

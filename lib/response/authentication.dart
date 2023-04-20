@@ -10,138 +10,90 @@ String authenticationToJson(Authentication data) => json.encode(data.toJson());
 
 class Authentication {
     Authentication({
-        this.accessToken,
-        this.tokenType,
-        this.user,
-        this.status,
-    });
-
-    String? accessToken;
-    String? tokenType;
-    User? user;
-    AuthenticationStatus? status;
-
-    factory Authentication.fromJson(Map<String, dynamic> json) => Authentication(
-        accessToken: json["access_token"],
-        tokenType: json["token_type"],
-        user: json["user"] == null ? null : User.fromJson(json["user"]),
-        status: json["status"] == null ? null : AuthenticationStatus.fromJson(json["status"]),
-    );
-
-    Map<String, dynamic> toJson() => {
-        "access_token": accessToken,
-        "token_type": tokenType,
-        "user": user?.toJson(),
-        "status": status?.toJson(),
-    };
-}
-
-class AuthenticationStatus {
-    AuthenticationStatus({
-        this.kode,
-        this.keterangan,
-    });
-
-    String? kode;
-    String? keterangan;
-
-    factory AuthenticationStatus.fromJson(Map<String, dynamic> json) => AuthenticationStatus(
-        kode: json["kode"],
-        keterangan: json["keterangan"],
-    );
-
-    Map<String, dynamic> toJson() => {
-        "kode": kode,
-        "keterangan": keterangan,
-    };
-}
-
-class User {
-    User({
-        this.status,
-        this.data,
-    });
-
-    AuthenticationStatus? status;
-    Data? data;
-
-    factory User.fromJson(Map<String, dynamic> json) => User(
-        status: json["status"] == null ? null : AuthenticationStatus.fromJson(json["status"]),
-        data: json["data"] == null ? null : Data.fromJson(json["data"]),
-    );
-
-    Map<String, dynamic> toJson() => {
-        "status": status?.toJson(),
-        "data": data?.toJson(),
-    };
-}
-
-class Data {
-    Data({
+        this.id,
         this.email,
         this.hp,
         this.firstname,
         this.lastname,
         this.grup,
-        this.role,
         this.tglLahir,
         this.jenisKelamin,
-        this.id,
+        this.referralCode,
         this.status,
         this.accountStatus,
+        this.officialRepresentative,
         this.photo,
         this.toko,
+        this.createdAt,
+        this.updatedAt,
+        this.referredBy,
+        this.statusBlokir,
     });
 
+    int? id;
     String? email;
     String? hp;
     String? firstname;
     String? lastname;
     String? grup;
-    String? role;
     DateTime? tglLahir;
-    int? jenisKelamin;
-    int? id;
-    AccountStatusClass? status;
-    AccountStatusClass? accountStatus;
+    AccountStatus? jenisKelamin;
+    String? referralCode;
+    AccountStatus? status;
+    AccountStatus? accountStatus;
+    AccountStatus? officialRepresentative;
     Photo? photo;
-    Toko? toko;
+    dynamic toko;
+    CreatedAt? createdAt;
+    dynamic updatedAt;
+    dynamic referredBy;
+    dynamic statusBlokir;
 
-    factory Data.fromJson(Map<String, dynamic> json) => Data(
+    factory Authentication.fromJson(Map<String, dynamic> json) => Authentication(
+        id: json["id"],
         email: json["email"],
         hp: json["hp"],
         firstname: json["firstname"],
         lastname: json["lastname"],
         grup: json["grup"],
-        role: json["role"],
         tglLahir: json["tgl_lahir"] == null ? null : DateTime.parse(json["tgl_lahir"]),
-        jenisKelamin: json["jenis_kelamin"],
-        id: json["id"],
-        status: json["status"] == null ? null : AccountStatusClass.fromJson(json["status"]),
-        accountStatus: json["account_status"] == null ? null : AccountStatusClass.fromJson(json["account_status"]),
+        jenisKelamin: json["jenis_kelamin"] == null ? null : AccountStatus.fromJson(json["jenis_kelamin"]),
+        referralCode: json["referral_code"],
+        status: json["status"] == null ? null : AccountStatus.fromJson(json["status"]),
+        accountStatus: json["account_status"] == null ? null : AccountStatus.fromJson(json["account_status"]),
+        officialRepresentative: json["official_representative"] == null ? null : AccountStatus.fromJson(json["official_representative"]),
         photo: json["photo"] == null ? null : Photo.fromJson(json["photo"]),
-        toko: json["toko"] == null ? null : Toko.fromJson(json["toko"]),
+        toko: json["toko"],
+        createdAt: json["created_at"] == null ? null : CreatedAt.fromJson(json["created_at"]),
+        updatedAt: json["updated_at"],
+        referredBy: json["referred_by"],
+        statusBlokir: json["status_blokir"],
     );
 
     Map<String, dynamic> toJson() => {
+        "id": id,
         "email": email,
         "hp": hp,
         "firstname": firstname,
         "lastname": lastname,
         "grup": grup,
-        "role": role,
         "tgl_lahir": "${tglLahir!.year.toString().padLeft(4, '0')}-${tglLahir!.month.toString().padLeft(2, '0')}-${tglLahir!.day.toString().padLeft(2, '0')}",
-        "jenis_kelamin": jenisKelamin,
-        "id": id,
+        "jenis_kelamin": jenisKelamin?.toJson(),
+        "referral_code": referralCode,
         "status": status?.toJson(),
         "account_status": accountStatus?.toJson(),
+        "official_representative": officialRepresentative?.toJson(),
         "photo": photo?.toJson(),
-        "toko": toko?.toJson(),
+        "toko": toko,
+        "created_at": createdAt?.toJson(),
+        "updated_at": updatedAt,
+        "referred_by": referredBy,
+        "status_blokir": statusBlokir,
     };
 }
 
-class AccountStatusClass {
-    AccountStatusClass({
+class AccountStatus {
+    AccountStatus({
         this.kode,
         this.keterangan,
     });
@@ -149,7 +101,7 @@ class AccountStatusClass {
     int? kode;
     String? keterangan;
 
-    factory AccountStatusClass.fromJson(Map<String, dynamic> json) => AccountStatusClass(
+    factory AccountStatus.fromJson(Map<String, dynamic> json) => AccountStatus(
         kode: json["kode"],
         keterangan: json["keterangan"],
     );
@@ -157,6 +109,26 @@ class AccountStatusClass {
     Map<String, dynamic> toJson() => {
         "kode": kode,
         "keterangan": keterangan,
+    };
+}
+
+class CreatedAt {
+    CreatedAt({
+        this.waktu,
+        this.waktuIndonesia,
+    });
+
+    DateTime? waktu;
+    String? waktuIndonesia;
+
+    factory CreatedAt.fromJson(Map<String, dynamic> json) => CreatedAt(
+        waktu: json["waktu"] == null ? null : DateTime.parse(json["waktu"]),
+        waktuIndonesia: json["waktu_indonesia"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "waktu": waktu?.toIso8601String(),
+        "waktu_indonesia": waktuIndonesia,
     };
 }
 
@@ -168,6 +140,7 @@ class Photo {
         this.width,
         this.height,
         this.contentType,
+        this.storage,
         this.uri,
     });
 
@@ -177,6 +150,7 @@ class Photo {
     int? width;
     int? height;
     String? contentType;
+    String? storage;
     String? uri;
 
     factory Photo.fromJson(Map<String, dynamic> json) => Photo(
@@ -186,6 +160,7 @@ class Photo {
         width: json["width"],
         height: json["height"],
         contentType: json["content_type"],
+        storage: json["storage"],
         uri: json["uri"],
     );
 
@@ -196,94 +171,7 @@ class Photo {
         "width": width,
         "height": height,
         "content_type": contentType,
+        "storage": storage,
         "uri": uri,
-    };
-}
-
-class Toko {
-    Toko({
-        this.nama,
-        this.jalan,
-        this.kelurahan,
-        this.kecamatan,
-        this.kota,
-        this.provinsi,
-        this.kodepos,
-        this.detailAlamat,
-        this.longitude,
-        this.latitude,
-        this.telp,
-        this.email,
-        this.slogan,
-        this.deskripsi,
-        this.aturanBelanja,
-        this.aturanRetur,
-        this.id,
-        this.status,
-        this.logo,
-    });
-
-    String? nama;
-    String? jalan;
-    String? kelurahan;
-    String? kecamatan;
-    String? kota;
-    String? provinsi;
-    String? kodepos;
-    String? detailAlamat;
-    int? longitude;
-    int? latitude;
-    String? telp;
-    String? email;
-    String? slogan;
-    String? deskripsi;
-    String? aturanBelanja;
-    String? aturanRetur;
-    int? id;
-    AccountStatusClass? status;
-    List<Photo>? logo;
-
-    factory Toko.fromJson(Map<String, dynamic> json) => Toko(
-        nama: json["nama"],
-        jalan: json["jalan"],
-        kelurahan: json["kelurahan"],
-        kecamatan: json["kecamatan"],
-        kota: json["kota"],
-        provinsi: json["provinsi"],
-        kodepos: json["kodepos"],
-        detailAlamat: json["detail_alamat"],
-        longitude: json["longitude"],
-        latitude: json["latitude"],
-        telp: json["telp"],
-        email: json["email"],
-        slogan: json["slogan"],
-        deskripsi: json["deskripsi"],
-        aturanBelanja: json["aturan_belanja"],
-        aturanRetur: json["aturan_retur"],
-        id: json["id"],
-        status: json["status"] == null ? null : AccountStatusClass.fromJson(json["status"]),
-        logo: json["logo"] == null ? [] : List<Photo>.from(json["logo"]!.map((x) => Photo.fromJson(x))),
-    );
-
-    Map<String, dynamic> toJson() => {
-        "nama": nama,
-        "jalan": jalan,
-        "kelurahan": kelurahan,
-        "kecamatan": kecamatan,
-        "kota": kota,
-        "provinsi": provinsi,
-        "kodepos": kodepos,
-        "detail_alamat": detailAlamat,
-        "longitude": longitude,
-        "latitude": latitude,
-        "telp": telp,
-        "email": email,
-        "slogan": slogan,
-        "deskripsi": deskripsi,
-        "aturan_belanja": aturanBelanja,
-        "aturan_retur": aturanRetur,
-        "id": id,
-        "status": status?.toJson(),
-        "logo": logo == null ? [] : List<dynamic>.from(logo!.map((x) => x.toJson())),
     };
 }
